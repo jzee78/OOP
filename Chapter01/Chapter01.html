@@ -9,6 +9,141 @@
     <title>OOP - Chapter01</title>
 </head>
 <body>
+<script type="text/javascript">
+var arr = new Array(1, 2, 3, 4, 5);  //배열
+var obj = new Object({p1:1, p2:2});  //객체
+var num = new Number(5);  //숫자
+var string = new String('IU');  //문자
+var bool = new Boolean(true);  //불리언
+//리터럴
+var arr = [1, 2, 3, 4, 5];  //배열
+var obj = {p1:1, p2:2};  //객체
+var num = 5;  //숫자
+var string = 'IU';  //문자
+var bool = true;  //불리언
+
+///////////////////////////////////// 기본타입, 원시타입 //////////////////////////////////////////////
+//숫자
+var num = 5 / 2;
+console.log(num);
+console.log(Math.floor(num));
+
+//문자
+var str1 = "IU";
+var str2 = 'IU';
+
+console.log(str1[0]); //index에 접근 가능
+str1[0] = 'Y';
+console.log(str1); //문자열은 수정이 불가능
+
+//불린
+//true, false
+
+//null, undefinded
+//비어 있는 값
+console.log(window.undefinded); //타입이자 값, 값이 할당되지 않은 변수
+var nullvar = null;
+console.log(nullvar); //개발자가 명시적으로 비어있는 값을 할당
+console.log(typeof nullvar === null); //typeof 사용하면 object 출력
+console.log(nullvar === null);
+
+///////////////////////////////////// 참조타입 //////////////////////////////////////////////
+//원시 타입은 하나의 값만을 가지는데 비해, 참조 타입인 객체는 여러 개의 프로퍼티들을 포함할 수 있다.
+var foo = new Object(); //객체 생성자 이용
+
+foo.name = 'foo';
+foo.age = 30;
+foo.gender = 'male';
+console.log(typeof foo); //object
+console.log(foo);
+
+var bar = {
+    name: 'bar',
+    age: 30,
+    gender: 'male'
+};   //객체 리터럴이용
+console.log(typeof bar); //object
+console.log(bar);
+
+//참조타입의 특징
+var objA = {
+    val: 40
+};
+var objB = objA;
+console.log(objA.val);
+console.log(objB.val);
+
+objB.val = 50;
+console.log(objA.val);
+console.log(objB.val);
+
+///////////////////////////////////// 원시타입과 참조타입 차이 //////////////////////////////////////////////
+var a =100;
+var objA = {value: 100};
+
+function changeArg(num, obj){
+    num = 200;
+    obj.value = 200;
+    console.log(num); //복사된 값
+    console.log(obj); //참조된 값
+}
+changeArg(a, objA);
+console.log(a);
+console.log(objA);
+
+
+function Person(name){
+    this.name = name;
+    this.setNewName = function(){
+        return console.log(this.name);
+    }
+}
+
+var mySon = new Person('IU');
+//console.log(mySon);
+//console.log(mySon.name());
+//console.log(mySon.a);
+
+alert(square(4));
+var square = 0;
+function square(x){
+    return x*x;
+}
+alert(square);
+
+//var square;
+//var square = function square(x){...}
+
+// alert(square(4));         //16
+// square = 0;
+
+// alert(square);             //0
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
