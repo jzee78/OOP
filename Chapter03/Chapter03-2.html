@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="jzee">
+    <meta name="Keywords" content="OOP-JAVASCRIPT">
+    <meta name="Description" content="core-javascript-study">
+    <title>OOP - Chapter03-2</title>
+</head>
+<body>
+<script type="text/javascript">
+///////////////////////////// 2017-03-08 함수 v.3-2 ////////////////////////////
+
+var Func = new Function('x', 'y', 'return x + y');
+console.log( Func(1,2) );
+console.dir(Function);
+//* "인스턴스란?" => "현재 생성된 바로 그 객체" 예) var func = new Function();
+//* 변수 func는 "Function의 인스턴스다."
+//* 인스턴스를 생성하는 함수를 함수 생성자라한다(constructor). 여기서 Function 함수를 의미한다.
+//* Object, Array 또한 함수의 인스턴스다!
+
+console.dir(Object); //Object 도 함수로 만들어졌다는 것을 확인할 수 있다.
+console.dir(Array); //Array 도 함수로 만들어졌다는 것을 확인할 수 있다.
+var obj = new Object();
+var obj = {}; //(리터럴표현)
+var arr = new Array();
+var arr = []; //(리터럴표현)
+
+
+////////////////////// Object함수를 통한 인스턴스 객체 생성 //////////////////////
+//p.90 => 그림 3.7
+//Object 함수 객체를 통해 mySon, yourSon 객체 인스턴스를 생성하였다.
+var mySon = {name: 'zeon', age: 40};
+console.log(mySon);
+var yourSon = {name: 'IU', age: 23};
+console.log(yourSon);
+
+///// Object 생성자 함수를 이용한 객체 생성 /////
+//Object()를 이용해서 zeon 빈 객체 생성
+var zeon = new Object();
+//zeon 객체 프로퍼티 생성
+zeon.name = 'zeon';
+zeon.age = 40;
+zeon.gender = 'male';
+
+console.log(typeof zeon);
+console.log(zeon);
+
+//객체 리터럴 방식을 이용해서 IU 빈 객체 생성
+var IU = new Object();
+//IU 객체 프로퍼티 생성
+IU.name = 'IU';
+IU.age = 23;
+IU.gender = 'female';
+
+console.log(typeof IU);
+console.log(IU);
+
+//p.91 => 그림 3.8
+//Function 함수도 마찬가지로 아래와 같이 객체들을 생성한다.
+function f(){ };
+function Object(){ };
+function Array(){ };
+
+//모든 함수는 Function에서 정의하는 멤버(속성, 메서드)를 공유한다.
+console.dir(Function); //prototype을 펼쳐보면 확인이 가능하다.
+function func(a, b, c){
+  return a + b + c;
+}
+console.log(func.length); //이런 방식으로 함수의 멤버들을 사용할 수 있다.
+console.log(func.toString()); //이런 방식으로 함수의 멤버들을 사용할 수 있다.
+
+// *Function ---생성---> Object ---생성---> Object 객체*
+// *function Function(){ } ---생성--->  var Object = new Function(); ---생성---> var obj = new Object();*
+
+
+/////////////////////////////////// 함수 객체 ///////////////////////////////////
+
+//함수정의
+//-------------------------------------------------------------
+
+//var add = function add(x, y){return x+y;} *몇번 말했지만 매우 중요한 개념이다. 파싱 단계에서 add함수 객체가 정의 된다.
+
+function add(x, y){
+  return x+y;
+}
+
+//-------------------------------------------------------------
+
+
+//함수리터럴
+//-------------------------------------------------------------
+
+var add = function(x, y){
+  return x+y;
+}
+
+//var add; 파싱 단계에서는 변수 add만의 정의 되고(undefined)
+
+//add = function(x, y){ //*실행 단계(런타임)에서 add를 만나면 함수 객체가 정의 된다.
+  //return x+y;
+//}
+
+
+//-------------------------------------------------------------
+
+// *****함수 이름의 실체는 var 변수다.*****
+
+//변수 할당
+var abc = function(a, b, c){
+  return a + b + c;
+}
+abc.Description = 'I\'m function';
+
+var def = abc;
+console.log( def(1,2,3) );
+console.log( def.Description );
+
+//익명함수
+var add = function(x, y){
+  return x + y;
+}
+
+
+//---------------------------------------------------------------------------//
+////////////// 그렇다면 생성자와 인스턴스를 사용하는 이유는 무엇일까? //////////////
+//게임을 만든다고 하자. 여러가지의 게임 캐릭터들이 필요하다. 그리고 그들은 자기소개를 하는 기능을 가지고 있다.
+var char1 = {
+  tribe: 'elf',
+  name: 'IU',
+  age: 123,
+  height: 170,
+  gender: 'female',
+  introduce: function(){
+    return console.log('My name is IU. I am an Elf.');
+  }
+}
+char1.introduce();
+
+var char2 = {
+  tribe: 'human',
+  name: 'zeon',
+  age: 140,
+  height: 200,
+  gender: 'male',
+  introduce: function(){
+    return console.log('My name is zeon. I am an Oak.');
+  }
+}
+char2.introduce();
+
+var char3 = {
+  tribe: 'hobbit',
+  name: 'kye',
+  age: 130,
+  height: 100,
+  gender: 'female',
+  introduce: function(){
+    return console.log('My name is kye. I am a Hobbit.');
+  }
+}
+char3.introduce();
+//이런 식으로 계속 게임 캐릭터들을 늘려가면 얼마나 힘이 들겠는가...만약 추가해야 하는 캐릭터가 몇만개라면?
+//그렇다면 생성자를 통해서 인스턴스를 생성하여 캐릭터들을 생성해보자.
+//생성자 함수
+function Char(tribe, name, age, height, gender, introduce){
+  this.tribe = tribe;
+  this.name = name;
+  this.age = age;
+  this.height = height;
+  this.gender = gender;
+  this.introduce = introduce;
+  this.sayIntroduce = function(){
+    return console.log(this.introduce);
+  }
+}
+
+//인스턴스 생성
+var char4 = new Char('Elf', 'IU', 123, 170, 'female', 'My name is IU. I am an Elf.');
+char4.sayIntroduce();
+var char5 = new Char('Oak', 'zeon', 140, 200, 'male', 'My name is zeon. I am an Oak.');
+char5.sayIntroduce();
+var char6 = new Char('Hobbit', 'kye', 123, 100, 'female', 'My name is kye. I am a Hobbit.');
+char6.sayIntroduce();
+//이처럼 한줄로 쉽고 편하게 캐릭터를 추가 할수있다. 자기소개 기능도 이제 문구만 적어 넣으면 된다.
+
+</script>
+
+
+
+</body>
+</html>
