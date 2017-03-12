@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="jzee">
+    <meta name="Keywords" content="OOP-JAVASCRIPT">
+    <meta name="Description" content="core-javascript-study">
+    <title>OOP - Chapter03-2</title>
+</head>
+<body>
+<script type="text/javascript">
+///////////////////////////// 2017-03-15 함수 v.3-3 ////////////////////////////
+////////////////////////////////// 콜백 함수 ///////////////////////////////////
+//어떤 이벤트가 발생했거나 특정 시점에 도달했을 때 시스템에서 호출되는 함수.
+function func(num, callback){
+    console.log(num); //기본적으로 func 함수는 콘솔창에 인자를  보여주는 함수.
+    if(typeof callback === 'function' && (num>10 && num<20) ){  //func함수가 실행을 마치고 조건이 충족 되었을 때 특정 함수(콜백함수)가 실행된다.
+        var msg = '값은 ' + num + ' 입니다.';
+        setTimeout(function(){
+            callback(msg);
+        }, 1500);
+    }
+}
+func(11, function(msg){
+    return alert(msg);
+});
+
+//예) 콜백구조는 제이쿼리에서도 흔히 쓰인다.
+$('#suji').click(function(){
+  alert('suji');
+});
+</script>
+
+
+
+</body>
+</html>

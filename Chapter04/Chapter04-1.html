@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="jzee">
+    <meta name="Keywords" content="OOP-JAVASCRIPT">
+    <meta name="Description" content="core-javascript-study">
+    <title>OOP - Chapter03-2</title>
+</head>
+<body>
+<script type="text/javascript">
+///////////////////////// 2017-03-15 변수 스코프 v.4-1 /////////////////////////
+
+//* 변수는 함수 단위로 관리한다.
+if(true){ var i = 5; }
+console.log(i);
+
+for(var j=0; j<10; j++){ }
+console.log(j);
+
+function funcScope1(){
+    var k = 20;
+}
+funcScope1();
+//console.log(k); Reference Error
+
+function funcScope2(){
+     l = 30; //var로 선언되지 않은 변수는 전역 변수 스코프에 정의 된다.
+}
+funcScope2();
+console.log(l);
+
+
+//* 변수 스코프 객체
+function add(x, y){
+    var a = x*y;
+    return a;
+}
+add(1, 2, 3);
+//예를들면 이런 방식으로 add 함수의 변수 스코프 객체가 형성 된다.
+// add 변수 객체 = {
+//     [[scope]]: {0: global, 1: add},
+//     arguments: [1, 2, 3],
+//     x: 1,
+//     y: 2,
+//     a: undefined,
+//     this: window
+// }
+console.dir(add);
+
+
+//* 렉시컬 특성이란? "코드 그대로의 환경"을 기준으로 정의한 변수 스코프에서 검색
+//* 실행 시의 변수 검색은 렉시컬 영역을 기준으로 한다. 매우 중요한 개념이므로 p.109 그림 4.3을 주목할 필요가 있다.
+var x = 'global';
+function f(){
+    //x; 현재 x는 undefined
+    console.log(x); //글로벌 영역에 x가 존재한다. 하지만 f함수의 스코프에 x가 존재하므로 f함수의  지역변수 x값이 할당된다.
+    var x = 'local';  //x = 'local'; 실행 구간에 값이 할당 된다.
+    console.log(x);
+}
+f();
+
+
+//* 실행 시의 변수 검색은 변수 스코프 체인을 이용한다. 변수 검색이 가능한 영역은 변수가 정의된 힘수의 변수 스코프와 부모 함수를 포함한조상 함수의 변수 스코프다.
+function scope1(){
+    var x = 1;   //"정의하고 있는 함수" 의 변수 스코프에서부터 먼저 검색을 하고 값이 있으면 사용하고 없으면 상위 함수의 스코프로 올라간다.
+    var y = 10;
+    console.log(x);
+    //console.log(a);  //Reference Error a is not defined  //자식 함수
+    function scope2(){
+        var x = 2;
+        var z = 20;
+        console.log(x);  //"정의하고 있는 함수" 의 변수 스코프에서부터 먼저 검색을 하고 값이 있으면 사용하고 없으면 상위 함수의 스코프로 올라간다.
+        console.log(y);
+        console.log(z);
+        //console.log(a);  //Reference Error a is not defined
+        function scope3(){
+            var x = 3;
+            var a = 30;
+            console.log(x);    //"정의하고 있는 함수" 의 변수 스코프에서부터 먼저 검색을 하고 값이 있으면 사용하고 없으면 상위 함수의 스코프로 올라간다.
+            console.log(y);
+            console.log(z);
+            console.log(a);
+        }
+        scope3();
+    }
+    scope2();
+}
+scope1();
+</script>
+</body>
+</html>
