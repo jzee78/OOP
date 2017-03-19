@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="jzee">
+    <meta name="Keywords" content="OOP-JAVASCRIPT">
+    <meta name="Description" content="core-javascript-study">
+    <title>OOP - Chapter05-1</title>
+</head>
+<body>
+<script type="text/javascript">
+///////////////////////// 2017-03-23 객체지향 v.5-1 ////////////////////////////
+
+
+//* 객체 *//
+var myComputer = {
+    body: 'notebook',                            //상태(property, 속성)
+    cpu: 'i7-7',
+    memory: 16,
+    os: 'window10',
+    batteryFullAction: function(){
+        console.log('충전이 완료되었습니다.');     //행동(method, 메서드)
+    }
+};
+
+
+
+//* 클래스(Class), 캡슐화 *//
+function Bird(spices, sound){
+    this.spices = spices;
+    var sound = sound; //객체를 통해 접근할 수 없다.(캡슐화를 통한 은닉) 외부에서 수정 불가.
+    this.soundAction = function(){
+        return console.log(sound); // 클로저를 통해 sound에 접근한다.
+    }
+}
+//참새
+var sparrow = new Bird('sparrow', 'zzak. zzak.');
+sparrow.soundAction();
+//독수리
+var eagle = new Bird('eagle', 'keek.');
+eagle.soundAction();
+
+
+//* 집합 *//
+function Computer(){
+    this.init();
+}
+Computer.prototype.init = function(){
+    this.coalescence();
+}
+Computer.prototype.coalescence = function(){
+    console.log( '합체: ' + this.monitor() + ' + ' + this.keyboard()  + ' + ' + this.mouse() );
+}
+Computer.prototype.monitor = function(){ return 'monitor!'; }
+Computer.prototype.keyboard = function(){ return 'keyboard!'; }
+Computer.prototype.mouse = function(){ return 'mouse!'; }
+var computer1 = new Computer();
+
+
+//* 상속, 다형성 *//
+function Person(name){
+    this.name = name;
+}
+
+Person.prototype.walk = function(name){ console.log(this.name + '은(는) ' + '걷는다.'); }
+Person.prototype.talk = function(name){ console.log(this.name + '은(는) ' + '말한다. - person'); }
+Person.prototype.sleep = function(name){ console.log(this.name + '은(는) ' + '잔다.'); }
+Person.prototype.eat = function(name){ console.log(this.name + '은(는) ' + '먹는다.'); }
+
+function Korean(name){
+    this.name = name;
+}
+Korean.prototype = new Person();
+Korean.prototype.constructor = Korean;
+Korean.prototype.talk = function(name){ console.log(this.name + '은(는) ' + '말한다. - korean'); }
+
+console.dir(Person);
+console.dir(Korean);
+
+var zeon = new Person('진홍');
+zeon.walk();
+zeon.talk();
+var suji = new Korean('수지');
+suji.walk();
+suji.talk();
+
+</script>
+</body>
+</html>

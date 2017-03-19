@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="jzee">
+    <meta name="Keywords" content="OOP-JAVASCRIPT">
+    <meta name="Description" content="core-javascript-study">
+    <title>OOP - Chapter04-2</title>
+</head>
+<body>
+<script type="text/javascript">
+/////////////////////// 2017-03-23 클로저(closure) v.4-2 ///////////////////////
+
+//루트 객체
+var abc = 'root';
+console.log(abc);
+console.log(window.abc);
+console.log(this.abc); //전역 변수  스코프의 코드에서의 this는 루트 객체를 참조한다.
+console.log(window === this);
+
+
+/////////////////////////////// 클로저(closure)  ///////////////////////////////
+function outer(){
+    var x = 0; //아래 리턴된 익명 함수는 outer의 실행 환경(execution environment)에서 실행된다.(그러므로 익명 함수는 x를 참조한다. ) 렉시컬 특성을 떠올려보길 바란다.
+    return function(){  //내부 함수가 outer의 반환값으로 사용됐다.
+        return ++x;
+    };
+}
+
+var closure = outer();
+console.log( closure() );
+console.log( closure() );
+
+</script>
+</body>
+</html>
